@@ -1,0 +1,99 @@
+body {
+    background-image: url('https://images.unsplash.com/photo-1617957772039-694195b83a35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+label{
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: large;
+}
+
+input{
+    width: 150px;
+    height: 27px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#photo {
+    border: none;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+}
+h1 {
+    font-family:'Borel', serif ;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 80px;
+    margin-bottom: 0;
+}
+
+#createNew {
+    color: white;
+    background-color: #00509d;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 18px;
+    font-weight: bold;
+    font-family: 'Roboto Mono', serif;
+}
+
+#createNew:hover {
+    background-color: #00296b;
+}
+
+#submit {
+    color: white;
+    background-color: #a4133c;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 18px;
+    font-weight: bold;
+    font-family: 'Roboto Mono', serif;
+}
+
+#submit:hover {
+    background-color: #800f2f;
+}
+
+.container {
+    height: 250px;
+    width: 450px;
+    border: 3px solid black;
+    background-color: #f9dbbd;
+    border-radius: 10px;
+    margin-left: 37%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 0px;
+    width: 225px;
+    height: 200px;
+}
+
+.li {
+    font-family: 'Lora', serif;
+    margin-bottom: 15px;
+    margin-left: 0px;
+}
+
+.h3 {
+    font-family: 'REM', serif;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.img {
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 100px;
+    width: 100px;
+    top: 0;
+    margin-left: 50px;
+}
