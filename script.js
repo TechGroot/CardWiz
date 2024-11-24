@@ -13,7 +13,7 @@ submit.addEventListener('click', function (event) {
 
     if (checkNumber(inputNumber)) {
         const container = document.createElement('div');
-        container.setAttribute('id', container);
+        container.setAttribute('id', 'card-container'); 
         container.classList.add('container');
 
         const title = document.createElement('h3');
@@ -22,84 +22,85 @@ submit.addEventListener('click', function (event) {
         title.classList.add('h3');
 
         const newUl = document.createElement('ul');
-        newUl.classList.add('ul')
+        newUl.classList.add('ul');
 
-        const newName = document.createElement('li');
-        newName.classList.add('li');
-        newName.innerHTML = (`Name: <b>${inputName}</b>`);
-        newUl.appendChild(newName);
-        newName.addEventListener('click', () => {
-            const newValue = prompt('Enter New Value');
-            newName.innerHTML = (`Name: <b>${newValue}</b>`);
-        })
+        const fields = [
+            { label: 'Name', value: inputName },
+            { label: 'Number', value: inputNumber },
+            { label: 'Age', value: inputAge },
+            { label: 'Gender', value: inputGender },
+            { label: 'Occupation', value: inputOccupation }
+        ];
 
-        const newNumber = document.createElement('li');
-        newNumber.classList.add('li');
-        newNumber.innerHTML = (`Number: <b>${inputNumber}</b>`);
-        newUl.appendChild(newNumber);
-        newNumber.addEventListener('click', () => {
-            const newValue = prompt('Enter New Value');
-            newNumber.innerHTML = (`Number: <b>${newValue}</b>`);
-        })
-
-        const newAge = document.createElement('li');
-        newAge.classList.add('li');
-        newAge.innerHTML = (`Age: <b>${inputAge}</b>`);
-        newUl.appendChild(newAge);
-        newAge.addEventListener('click', () => {
-            const newValue = prompt('Enter New Value');
-            newAge.innerHTML = (`Age: <b>${newValue}</b>`);
-        })
-
-        const newGender = document.createElement('li');
-        newGender.classList.add('li');
-        newGender.innerHTML = (`Gender: <b>${inputGender}</b>`);
-        newUl.appendChild(newGender);
-        newGender.addEventListener('click', () => {
-            const newValue = prompt('Enter New Value');
-            newGender.innerHTML = (`Gender: <b>${newValue}</b>`);
-        })
-
-        const newOccupation = document.createElement('li');
-        newOccupation.classList.add('li');
-        newOccupation.innerHTML = (`Occupation: <b>${inputOccupation}</b>`);
-        newUl.appendChild(newOccupation);
-        newOccupation.addEventListener('click', () => {
-            const newValue = prompt('Enter New Value');
-            newOccupation.innerHTML = (`Occupation: <b>${newValue}</b>`);
-        })
+        fields.forEach(field => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('li');
+            listItem.innerHTML = `${field.label}: <b>${field.value}</b>`;
+            listItem.addEventListener('click', () => {
+                const newValue = prompt(`Enter New Value for ${field.label}`)
+                if (newValue !== null && newValue.trim() !== '') {
+                    listItem.innerHTML = `${field.label}: <b>${newValue}</b>`;
+                }
+            });
+            newUl.appendChild(listItem);
+        });
 
         const profilePhoto = document.createElement('img');
         let reader = new FileReader();
         reader.onload = function (event) {
             profilePhoto.src = reader.result;
         }
-        profilePhoto.classList.add('img')
+        profilePhoto.classList.add('img');
         reader.readAsDataURL(photo);
 
         const flexContainer = document.createElement('div');
         flexContainer.style.display = 'flex';
-        container.appendChild(flexContainer)
+        container.appendChild(flexContainer);
         flexContainer.appendChild(newUl);
         flexContainer.appendChild(profilePhoto);
 
         document.body.appendChild(container);
 
-    }
-})
+        const download = document.createElement('button');
+        download.innerText = "Download";
+        download.classList.add('download');
+        document.body.appendChild(download);
 
-createNew.addEventListener('click', function () {
-    form.reset();
-})
+        download.addEventListener('click', function () {
+            html2canvas(document.getElementById('card-container')).then(function(canvas) {
+                var link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png'); 
+                link.download = 'card.png'; 
+                link.click();
+            });
+        });
+
+        submit.scrollIntoView({ behavior: 'smooth' });
+    }
+});
+
+
+createNew.addEventListener('click', function (event) {
+    event.preventDefault(); 
+    document.querySelector('form').reset(); 
+    const container = document.getElementById('card-container');
+    if (container) {
+        container.remove();
+    }
+    const downloadButton = document.querySelector('.download');
+    if (downloadButton) {
+        downloadButton.remove();
+    }
+});
 
 function checkNumber(number) {
     if (number.charAt(0) !== '7' && number.charAt(0) !== '8' && number.charAt(0) !== '9') {
         alert(`Phone number cannot start with ${number.charAt(0)}`);
     } else if (number.length < 10) {
-        alert("Phone number should of 10 digits")
+        alert("Phone number should be of 10 digits");
     } else if (number.length > 10) {
-        alert("Phone number can be of only 10 digits")
+        alert("Phone number can be of only 10 digits");
     } else {
-        return true
+        return true;
     }
 }
